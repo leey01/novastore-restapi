@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Client\ProfileController;
 
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\OrderController;
@@ -31,9 +32,7 @@ Route::get('/home', function () {
 
 Route::post('/register', [LoginController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
-
 Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth:api');
-
 
 
 // Home
@@ -55,5 +54,8 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'price'], function () {
 });
 
 // Profile
-
+Route::group(['middleware' => ['auth:api'], 'prefix' => 'profile'], function () {
+    Route::get('/', [ProfileController::class, 'index']);
+    Route::post('/edit-profile', [ProfileController::class, 'update']);
+});
 
