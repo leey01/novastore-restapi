@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Client\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,8 @@ Route::post('/register', [LoginController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth:api');;
+
+Route::group(['middleware' => ['auth:api'], 'prefix' => 'profile'], function () {
+    Route::get('/', [ProfileController::class, 'index']);
+    Route::post('/edit-profile', [ProfileController::class, 'update']);
+});
