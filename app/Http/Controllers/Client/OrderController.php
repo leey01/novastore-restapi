@@ -11,8 +11,20 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $data = DB::table('transaksis')
+        $data = Transaksi::with('user', 'game', 'item')
+            ->orderBy('created_at', 'DESC')
             ->get();
+
+        return response()->json([
+            'data' => $data
+        ]);
+    }
+
+    public function show($id)
+    {
+        $data = Transaksi::with('user', 'game', 'item')
+            ->where('id', $id)
+            ->first();
 
         return response()->json([
             'data' => $data

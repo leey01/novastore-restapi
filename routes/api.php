@@ -38,12 +38,18 @@ Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth:api'
 // Home
 Route::group(['middleware' => ['auth:api'], 'prefix' => 'home'], function () {
     Route::get('/', [HomeController::class, 'index']);
+    Route::post('/pay-transaksi', [HomeController::class, 'payTransaksi']);
+    Route::post('/create-transaksi', [HomeController::class, 'createTransaksi']);
     Route::get('/search', [HomeController::class, 'search']);
+    Route::get('/show/{id}', [HomeController::class, 'show']);
+    Route::get('/list-pembayaran', [HomeController::class, 'listPembayaran']);
 });
+
 
 // Order
 Route::group(['middleware' => ['auth:api'], 'prefix' => 'order'], function () {
     Route::get('/', [OrderController::class, 'index']);
+    Route::get('/show/{id}', [OrderController::class, 'show']);
     Route::get('/search', [OrderController::class, 'search']);
 });
 
