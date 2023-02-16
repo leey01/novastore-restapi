@@ -26,6 +26,8 @@ class OrderController extends Controller
             ->where('id', $id)
             ->first();
 
+        isset($data) ? $data = $data : $data = [];
+
         return response()->json([
             'data' => $data
         ]);

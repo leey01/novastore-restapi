@@ -37,7 +37,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth:api'
 
 
 // Home
-Route::group(['middleware' => ['auth:api'], 'prefix' => 'home'], function () {
+Route::group(['prefix' => 'home'], function () {
     Route::get('/', [HomeController::class, 'index']);
     Route::post('/pay-transaksi', [HomeController::class, 'payTransaksi']);
     Route::post('/create-transaksi', [HomeController::class, 'createTransaksi']);
@@ -48,14 +48,14 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'home'], function () {
 
 
 // Order
-Route::group(['middleware' => ['auth:api'], 'prefix' => 'order'], function () {
+Route::group(['prefix' => 'order'], function () {
     Route::get('/', [OrderController::class, 'index']);
     Route::get('/show/{id}', [OrderController::class, 'show']);
     Route::get('/search', [OrderController::class, 'search']);
 });
 
 // Price
-Route::group(['middleware' => ['auth:api'], 'prefix' => 'price'], function () {
+Route::group(['prefix' => 'price'], function () {
     Route::get('/', [PriceController::class, 'index']);
     Route::get('/list-harga', [PriceController::class, 'listHarga']);
 });
@@ -68,6 +68,8 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'profile'], function () 
 
 // Callback Midtrans
 Route::post('/callback', [TransaksiController::class, 'callback']);
+Route::get('/payment', [TransaksiController::class, 'payment']);
+Route::get('/payment-auth', [TransaksiController::class, 'payment'])->middleware('auth:api');
 
 // Payment midtrans
 Route::get('/payment', [TransaksiController::class, 'payment']);
