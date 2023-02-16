@@ -54,9 +54,14 @@ class TransaksiController extends Controller
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
-        return view('payment',[
-            'snap_token'=>$snapToken,
-        ]);
+//        return view('payment',[
+//            'snap_token'=>$snapToken,
+//        ]);
+
+        return response()->json([
+            'snap_token' => $snapToken,
+            'order_id' => $order_id,
+        ], 200);
     }
 
     public function callback(Request $request)

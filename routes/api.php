@@ -69,3 +69,6 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'profile'], function () 
 // Callback Midtrans
 Route::post('/callback', [TransaksiController::class, 'callback']);
 
+// Payment midtrans
+Route::get('/payment', [TransaksiController::class, 'payment']);
+
