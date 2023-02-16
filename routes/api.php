@@ -9,6 +9,7 @@ use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\OrderController;
 use App\Http\Controllers\Client\PriceController;
+use App\Http\Controllers\Client\TransaksiController;
 
 
 /*
@@ -64,4 +65,7 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'profile'], function () 
     Route::get('/', [ProfileController::class, 'index']);
     Route::post('/edit-profile', [ProfileController::class, 'update']);
 });
+
+// Callback Midtrans
+Route::post('/callback', [TransaksiController::class, 'callback']);
 

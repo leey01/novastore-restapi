@@ -30,6 +30,5 @@ class DatabaseSeeder extends Seeder
         User::factory(5)->create();
         Item::factory(10)->create();
         Pembayaran::factory(5)->create();
-        Transaksi::factory(8)->create();
     }
 }

@@ -17,6 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/form', [\App\Http\Controllers\Client\TransaksiController::class, 'index']);
+Route::get('/payment', [\App\Http\Controllers\Client\TransaksiController::class, 'payment']);
+
 Route::get('login', function () {
     return response([
         'status' => false,
