@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\GoogleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,11 @@ Route::get('/', function () {
 
 Route::get('/form', [\App\Http\Controllers\Client\TransaksiController::class, 'index']);
 Route::get('/payment', [\App\Http\Controllers\Client\TransaksiController::class, 'payment']);
+
+// Google Auth
+Route::get('/auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
 
 Route::get('login', function () {
     return response([

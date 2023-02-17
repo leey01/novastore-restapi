@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\Auth\GoogleController;
 
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\OrderController;
