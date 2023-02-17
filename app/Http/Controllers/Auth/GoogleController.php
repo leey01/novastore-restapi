@@ -23,12 +23,11 @@ class GoogleController extends Controller
         $finduser = User::where('google_id', $user->id)->first();
 
         if ($finduser) {
-            Auth::login($finduser);
+
             $token = $finduser->createToken($finduser->name)->accessToken;
             return response()->json([
                 'status' => true,
                 'message' => 'Login Success',
-                'data' => $finduser,
                 'token' => $token
             ], 200);
         } else {
@@ -41,12 +40,11 @@ class GoogleController extends Controller
                 'pf_avatar' => $user->getAvatar()
             ]);
 
-            Auth::login($newUser);
+
             $token = $newUser->createToken($newUser->name)->accessToken;
             return response()->json([
                 'status' => true,
                 'message' => 'Login Success',
-                'data' => $newUser,
                 'token' => $token
             ], 200);
         }
