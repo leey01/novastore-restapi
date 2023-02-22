@@ -27,6 +27,7 @@ class GoogleController extends Controller
             $token = $finduser->createToken($finduser->name)->accessToken;
             return response()->json([
                 'status' => true,
+                'data' => $user,
                 'message' => 'Login Success',
                 'token' => $token
             ], 200);
