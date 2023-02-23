@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('item');
             $table->integer('price');
             $table->string('pf_item');
-            $table->timestamps();
         });
     }
 
