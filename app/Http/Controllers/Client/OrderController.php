@@ -26,10 +26,10 @@ class OrderController extends Controller
             ->where('id', $id)
             ->first();
 
-        isset($data) ? $data = $data : $data = [];
+        isset($data) ? $result = $data : $result = [];
 
         return response()->json([
-            'data' => $data
+            'data' => $result
         ]);
     }
 
@@ -37,7 +37,8 @@ class OrderController extends Controller
     {
         $search = $request->search;
 
-        $result = Transaksi::whereHas('user', function ($q) use($search) {
+        $result = Transaksi::with('user', 'game', 'item')
+        ->whereHas('user', function ($q) use($search) {
             $q->where('name', 'like', '%'. $search .'%');
         })->orWhere('id', $search)->get();
 
