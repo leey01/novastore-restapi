@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\GameResource;
+use App\Http\Resources\ItemResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,7 +17,7 @@ class PriceController extends Controller
 
 
         return response()->json([
-            'data' => $dataGame,
+            'data' => GameResource::collection($dataGame)
         ]);
     }
 
@@ -28,7 +30,7 @@ class PriceController extends Controller
             ->get();
 
         return response()->json([
-            'data' => $dataHargaItem
+            'data' => ItemResource::collection($dataHargaItem)
         ]);
     }
 }
