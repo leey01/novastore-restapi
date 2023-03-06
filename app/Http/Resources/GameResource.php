@@ -25,6 +25,7 @@ class GameResource extends JsonResource
             'genre' => $this->genre,
             'pf_thumbnail' => $pf_thumbnail,
             'platform' => $this->platform,
+            'banner' => $this->banner,
         ];
     }
 }
