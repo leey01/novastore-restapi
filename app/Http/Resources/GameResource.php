@@ -15,6 +15,7 @@ class GameResource extends JsonResource
      */
     public function toArray($request)
     {
+        $banner = Storage::disk('public')->url($this->banner);
         $pf_thumbnail = Storage::disk('public')->url($this->pf_thumbnail);
 
         return [
@@ -25,7 +26,7 @@ class GameResource extends JsonResource
             'genre' => $this->genre,
             'pf_thumbnail' => $pf_thumbnail,
             'platform' => $this->platform,
-            'banner' => $this->banner,
+            'banner' => $banner,
         ];
     }
 }
