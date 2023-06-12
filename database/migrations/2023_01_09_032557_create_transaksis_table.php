@@ -14,17 +14,15 @@ return new class extends Migration
     public function up()
     {
         Schema::create('transaksis', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->foreignId('user_id')->nullable();
             $table->foreignId('game_id');
             $table->foreignId('item_id');
-            $table->string('player_id');
-            $table->string('zone_id')->nullable();
-            $table->integer('amount');
-            $table->integer('total_harga');
-            $table->foreignId('mtd_pembayaran_id');
-            $table->string('no_hp');
-            $table->enum('status', ['pending', 'done']);
+            $table->string('id_user');
+            $table->string('no_hp')->nullable();
+            $table->string('id_zone')->nullable();
+            $table->integer('harga');
+            $table->enum('status', ['Pending', 'Done']);
             $table->time('waktu');
             $table->timestamps();
         });

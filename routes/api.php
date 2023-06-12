@@ -5,10 +5,12 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\Auth\GoogleController;
 
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Client\OrderController;
 use App\Http\Controllers\Client\PriceController;
+use App\Http\Controllers\Client\TransaksiController;
 
 
 /*
@@ -36,10 +38,8 @@ Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth:api'
 
 
 // Home
-Route::group(['middleware' => ['auth:api'], 'prefix' => 'home'], function () {
+Route::group(['prefix' => 'home'], function () {
     Route::get('/', [HomeController::class, 'index']);
-    Route::post('/pay-transaksi', [HomeController::class, 'payTransaksi']);
-    Route::post('/create-transaksi', [HomeController::class, 'createTransaksi']);
     Route::get('/search', [HomeController::class, 'search']);
     Route::get('/show/{id}', [HomeController::class, 'show']);
     Route::get('/list-pembayaran', [HomeController::class, 'listPembayaran']);
@@ -47,14 +47,14 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'home'], function () {
 
 
 // Order
-Route::group(['middleware' => ['auth:api'], 'prefix' => 'order'], function () {
+Route::group(['prefix' => 'order'], function () {
     Route::get('/', [OrderController::class, 'index']);
     Route::get('/show/{id}', [OrderController::class, 'show']);
     Route::get('/search', [OrderController::class, 'search']);
 });
 
 // Price
-Route::group(['middleware' => ['auth:api'], 'prefix' => 'price'], function () {
+Route::group(['prefix' => 'price'], function () {
     Route::get('/', [PriceController::class, 'index']);
     Route::get('/list-harga', [PriceController::class, 'listHarga']);
 });
@@ -64,4 +64,11 @@ Route::group(['middleware' => ['auth:api'], 'prefix' => 'profile'], function () 
     Route::get('/', [ProfileController::class, 'index']);
     Route::post('/edit-profile', [ProfileController::class, 'update']);
 });
+
+// Callback Midtrans
+Route::post('/callback', [TransaksiController::class, 'callback']);
+
+// Payment midtrans
+Route::get('/payment', [TransaksiController::class, 'payment']);
+Route::get('/payment-auth', [TransaksiController::class, 'payment'])->middleware('auth:api');
 

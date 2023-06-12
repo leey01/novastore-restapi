@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\GameResource;
+use App\Http\Resources\ItemResource;
 use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -20,7 +22,7 @@ class HomeController extends Controller
             $list = DB::table('games')->get();
 
             return response()->json([
-                'data' => $list
+                'data' => GameResource::collection($list)
             ]);
         } catch (QueryException $e) {
             return response()->json([
@@ -37,8 +39,8 @@ class HomeController extends Controller
             $listItem = DB::table('items')->where('game_id', $id)->get();
 
             return response()->json([
-                'data' => $list,
-                'item' => $listItem
+                'data' => new GameResource($list),
+                'item' => ItemResource::collection($listItem)
             ]);
 
         } catch (QueryException $e) {
@@ -146,7 +148,7 @@ class HomeController extends Controller
 
         return response()->json([
             'search' => $search,
-            'data' => $result,
+            'data' => GameResource::collection($result),
         ]);
     }
 }

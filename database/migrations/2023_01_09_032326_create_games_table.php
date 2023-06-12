@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('genre');
             $table->string('platform');
             $table->string('pf_thumbnail');
-            $table->timestamps();
         });
     }
 
